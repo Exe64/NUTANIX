@@ -1,0 +1,4 @@
+#RENAME THE DEFAULT STORAGE CONTAINER
+
+ncli container list
+ncli container edit name=ACTUAL_NAME new-name=NEW_NAME
