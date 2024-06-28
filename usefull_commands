@@ -2,3 +2,9 @@
 
 ncli container list
 ncli container edit name=ACTUAL_NAME new-name=NEW_NAME
+
+ # Augmenter le buffer
+ ethtool -G eth0 rx 4096 tx 4096
+ 
+ # Désactiver TCP checksum offloading
+ ethtool -K eth0 rx off tx off
