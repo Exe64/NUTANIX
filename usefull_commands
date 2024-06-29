@@ -7,3 +7,12 @@ ethtool -G eth0 rx 4096 tx 4096
  
 #DISABLE TCP CHECKSUM OFFLOADING
 ethtool -K eth0 rx off tx off
+
+#UPDATE DISK TIER TO SSD
+ncli disk update id=DISK_ID tier-name=SSD-SATA
+
+#UPDATE DISK TIER TO NVME
+ncli disk update id=DISK_ID tier-name=
+
+#UPDATE DISK TIER TO HDD
+ncli disk update id=DISK_ID tier-name=HDD
