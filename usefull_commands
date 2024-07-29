@@ -1,12 +1,5 @@
-#RENAME THE DEFAULT STORAGE CONTAINER
-ncli container list
-ncli container edit name=ACTUAL_NAME new-name=NEW_NAME
-
-#UPDATE BUFFER
-ethtool -G eth0 rx 4096 tx 4096
- 
-#DISABLE TCP CHECKSUM OFFLOADING
-ethtool -K eth0 rx off tx off
+#LIST ALL CLUSTER HARDWARE
+ncc hardware_info show_hardware_info
 
 #UPDATE DISK TIER TO SSD
 ncli disk update id=DISK_ID tier-name=SSD-SATA
@@ -16,3 +9,13 @@ ncli disk update id=DISK_ID tier-name=
 
 #UPDATE DISK TIER TO HDD
 ncli disk update id=DISK_ID tier-name=HDD
+
+#RENAME THE DEFAULT STORAGE CONTAINER
+ncli container list
+ncli container edit name=ACTUAL_NAME new-name=NEW_NAME
+
+#UPDATE BUFFER
+ethtool -G eth0 rx 4096 tx 4096
+ 
+#DISABLE TCP CHECKSUM OFFLOADING
+ethtool -K eth0 rx off tx off
