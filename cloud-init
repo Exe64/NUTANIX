@@ -1,0 +1,57 @@
+#cloud-config
+
+# Basic system setup
+hostname: vm-name-xx
+fqdn: vm-name-xx.domain.local
+
+# User setup configuration
+users:
+  - name: exampleuser
+    gecos: Example User
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    groups: sudo
+    homedir: /home/exampleuser
+    shell: /bin/bash
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB3...restofpublickey user@host
+
+# Change passwords for exampleuser using chpasswd
+chpasswd:
+  expire: false
+  users:
+  - {name: exampleuser, password: terriblepassword12345, type: text}
+
+# Package management
+package_update: true
+package_upgrade: true
+packages:
+  - snmpd
+  - 
+  - 
+
+# Commands to run at the end of the cloud-init process
+runcmd:
+  - echo "Hello, world!" > /etc/motd
+  - systemctl restart nginx
+  - mkdir -p /var/www/html
+  - echo "<html><body><h1>Welcome to the party, pal!</h1></body></html>" > /var/www/html/index.html
+
+# Write files to the instance
+write_files:
+  - path: /etc/example_config.conf
+    content: |
+      [example-config]
+      key=value
+  - path: /etc/motd
+    content: |
+      Some text that will appear in your MOTD!
+
+# Final message, shown after cloud-init completes
+final_message: "The system is up, after $UPTIME seconds"
+
+# Reboot the instance after configuration
+power_state:
+  mode: reboot
+  message: Rebooting after initial setup
+  timeout: 30
+  condition: True
